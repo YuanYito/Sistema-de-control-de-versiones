@@ -38,6 +38,103 @@
   <p>El equipo tiene tres personas trabajando en partes distintas de la misma web. Git Flow separa el trabajo en curso (<code>develop</code> y las features) del código estable (<code>main</code>), reduce los errores humanos y deja un historial ordenado de funcionalidades, versiones y correcciones.</p>
 
   <h2>2. Proceso realizado</h2>
-  <!-- Aquí irá cada paso, con comandos y capturas -->
+    <h3>2.1 Resumen de commits</h3>
+  <table>
+    <tr><th>Elemento</th><th>Usuario</th><th>Parte de</th><th>Se fusiona con</th><th>Commits</th></tr>
+    <tr><td>Estructura inicial</td><td>Usuario1</td><td>develop</td><td>-</td><td>ae58f1a, eff81bb, bec6370, 2bcf24e</td></tr>
+    <tr><td>feature/contenidoHTML</td><td>Usuario2</td><td>develop</td><td>develop</td><td>43eb648, c96154b (merge d84de8b)</td></tr>
+    <tr><td>feature/atributosHTML</td><td>Usuario2</td><td>develop</td><td>develop</td><td>b6cdf84, c3c9601 (merge dc200d5)</td></tr>
+    <tr><td>feature/estilosCSS</td><td>Usuario3</td><td>develop</td><td>develop</td><td>0b7ea96, 24ede4f (merge 18b10a2)</td></tr>
+    <tr><td>release/v1.0</td><td>Usuario3</td><td>develop</td><td>main y develop</td><td>ac84c70 (merges 85b1db1 y 83eb00a), etiqueta v1.0</td></tr>
+    <tr><td>hotfix/mejorasV_1_0</td><td>Usuario1</td><td>main</td><td>main y develop</td><td>cea8062 (merges dcee0e8 y 6fd777d), etiqueta mejorasV_1_0</td></tr>
+  </table>
+
+  <h3>2.2 Usuario 1: repositorio, Git Flow y estructura inicial</h3>
+  <p>El Usuario 1 crea el repositorio en GitHub con un README, lo clona, crea la rama <code>develop</code> e inicializa Git Flow. En <code>git flow init</code> se aceptan los valores por defecto, con <code>main</code> como rama de producción, y el prefijo de etiquetas se deja vacío.</p>
+  <pre>git clone https://github.com/YuanYito/Sistema-de-control-de-versiones.git
+cd Sistema-de-control-de-versiones
+git branch develop
+git flow init
+git push -u origin develop</pre>
+  <img src="capturas/01-creacion-repo.png" alt="Repositorio creado en GitHub">
+  <img src="capturas/01-creacion-repo.png" alt="Salida de git flow init">
+
+  <p>Después crea la estructura inicial directamente en <code>develop</code>: <code>index.html</code> con cabecera, navegación con Home, descripción del curso y pie, y <code>css/style.css</code> con la imagen de fondo de la cabecera. Un último commit corrige el enlace de la imagen y ajusta textos.</p>
+  <pre>git add index.html
+git commit -m "Usuario1: añade estructura inicial de la página"
+git add css img
+git commit -m "Usuario1: añade estilos base y cabecera con imagen de fondo"
+git push origin develop</pre>
+  <img src="capturas/Home.png" alt="Página Home del curso">
+
+  <h3>2.3 Usuario 2: feature/contenidoHTML</h3>
+  <p>Añade la página <code>contenido.html</code> con ejemplos de <code>innerHTML</code> (cambiar un texto e insertar HTML en una caja) y el enlace en la navegación. Parte de <code>develop</code> y se fusiona de vuelta en <code>develop</code>.</p>
+  <pre>git flow feature start contenidoHTML
+git add contenido.html
+git commit -m "Usuario2: añade sección Modificar contenido HTML con ejemplos de innerHTML"
+git add index.html
+git commit -m "Usuario2: añade enlace a Modificar contenido HTML en la navegación"
+git flow feature publish contenidoHTML
+git flow feature finish contenidoHTML
+git push origin develop</pre>
+  <img src="capturas/04-feature-contenidoHTML.png" alt="Cierre de feature/contenidoHTML y grafo">
+  <img src="capturas/Contenido.png" alt="Página Modificar contenido HTML">
+
+  <h3>2.4 Usuario 2: feature/atributosHTML</h3>
+  <p>Añade <code>atributos.html</code> con ejemplos de <code>setAttribute</code> (cambiar el tamaño de una imagen y el destino de un enlace) y actualiza la navegación de las páginas existentes. Se hace después de cerrar la primera feature para evitar conflictos en el menú.</p>
+  <pre>git flow feature start atributosHTML
+git add atributos.html
+git commit -m "Usuario2: añade sección Modificar atributos HTML con ejemplos de setAttribute"
+git add index.html contenido.html
+git commit -m "Usuario2: añade enlace a Modificar atributos HTML en la navegación"
+git flow feature publish atributosHTML
+git flow feature finish atributosHTML
+git push origin develop</pre>
+  <img src="capturas/05-feature-atributosHTML.png" alt="Cierre de feature/atributosHTML y grafo">
+  <img src="capturas/Atributos.png" alt="Página Modificar atributos HTML">
+
+  <h3>2.5 Usuario 3: feature/estilosCSS</h3>
+  <p>Añade <code>estilos.html</code> con ejemplos comentados de la propiedad <code>style</code> (tamaño de fuente, colores y mostrar u ocultar un elemento) y el enlace en la navegación de las demás páginas.</p>
+  <pre>git flow feature start estilosCSS
+git add estilos.html
+git commit -m "Usuario3: añade sección Modificar estilos CSS con ejemplos comentados"
+git add index.html contenido.html atributos.html
+git commit -m "Usuario3: añade enlace a Modificar estilos CSS en la navegación"
+git flow feature publish estilosCSS
+git flow feature finish estilosCSS
+git push origin develop</pre>
+  <img src="capturas/06-feature-estilosCSS.png" alt="Cierre de feature/estilosCSS y grafo">
+  <img src="capturas/Estilos.png" alt="Página Modificar estilos CSS">
+
+  <h3>2.6 Usuario 3: release v1.0</h3>
+  <p>Con las tres features en <code>develop</code>, el Usuario 3 crea la release <code>v1.0</code>, en la que solo se actualiza el README. Al cerrarla, Git Flow la fusiona en <code>main</code> y en <code>develop</code> y crea la etiqueta <code>v1.0</code>. El mensaje de la etiqueta se indica con <code>-m</code>.</p>
+  <pre>git flow release start v1.0
+git add README.md
+git commit -m "Usuario3: prepara la versión v1.0 con descripción en el README"
+git flow release publish v1.0
+git flow release finish -m "Versión v1.0" v1.0
+git push origin develop
+git push origin main
+git push origin --tags</pre>
+  <img src="capturas/07-release-v1.0.png" alt="Cierre de la release v1.0 y etiqueta">
+
+  <h3>2.7 Usuario 1: hotfix/mejorasV_1_0</h3>
+  <p>Como encargado de las pruebas, el Usuario 1 mejora la sección de contenido del Usuario 2 con un tercer ejemplo: un campo de texto cuyo contenido se muestra en la página con <code>textContent</code>. Un hotfix parte de <code>main</code> y se fusiona en <code>main</code> y en <code>develop</code>. Como el prefijo de etiquetas está vacío, la etiqueta se llama <code>mejorasV_1_0</code>.</p>
+  <pre>git flow hotfix start mejorasV_1_0
+git add contenido.html
+git commit -m "Usuario1: mejora la sección de contenido con un ejemplo de texto introducido por el usuario"
+git flow hotfix publish mejorasV_1_0
+git flow hotfix finish -m "Mejoras v1.0" mejorasV_1_0
+git push origin develop
+git push origin main
+git push origin --tags</pre>
+  <img src="capturas/08-hotfix-mejorasV_1_0.png" alt="Cierre del hotfix y etiqueta">
+
+  <h3>2.8 Resultado final</h3>
+  <p>El historial completo muestra las tres features, la release y el hotfix integrados en <code>develop</code> y <code>main</code>. Cada commit indica el usuario que lo realiza en su mensaje.</p>
+  <img src="capturas/09-grafo-final.png" alt="Grafo final de commits">
+  <p>El repositorio contiene las ramas <code>main</code>, <code>develop</code> y <code>gh-pages</code> (esta documentación), y se ha dado acceso como colaborador a <code>IvanPallares</code>.</p>
+  <img src="capturas/10-github-pages.png" alt="Configuración de GitHub Pages">
+  <img src="capturas/11-colaborador.png" alt="Colaborador añadido al repositorio">
 </body>
 </html>
