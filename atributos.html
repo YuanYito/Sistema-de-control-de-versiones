@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modificar atributos HTML</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Curso de JavaScript aplicado a HTML</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contenido.html">Modificar contenido HTML</a></li>
+      <li><a href="atributos.html">Modificar atributos HTML</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Modificar atributos HTML</h2>
+    <p>El método <code>setAttribute</code> permite cambiar los atributos de cualquier elemento desde JavaScript.</p>
+
+    <!-- Ejemplo 1: cambiar el tamaño y el texto alternativo de una imagen -->
+    <img id="imagen" src="img/img-fondo.webp" width="200" alt="Imagen pequeña">
+    <p><button type="button" onclick="ampliarImagen()">Ampliar imagen</button></p>
+
+    <!-- Ejemplo 2: cambiar el destino de un enlace -->
+    <p><a id="enlace" href="https://www.w3schools.com">Ir a W3Schools</a></p>
+    <button type="button" onclick="cambiarEnlace()">Cambiar enlace</button>
+
+    <script>
+      // setAttribute(nombre, valor) modifica un atributo existente o lo crea
+      function ampliarImagen() {
+        const imagen = document.getElementById("imagen");
+        imagen.setAttribute("width", "400");
+        imagen.setAttribute("alt", "Imagen ampliada");
+      }
+
+      // Aquí cambiamos el atributo href y el texto del enlace
+      function cambiarEnlace() {
+        const enlace = document.getElementById("enlace");
+        enlace.setAttribute("href", "https://developer.mozilla.org");
+        enlace.innerHTML = "Ir a MDN Web Docs";
+      }
+    </script>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Curso de JavaScript aplicado a HTML</p>
+  </footer>
+</body>
+</html>
