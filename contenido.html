@@ -32,6 +32,11 @@
     <div id="caja">Esta caja está vacía.</div>
     <button type="button" onclick="insertarHTML()">Insertar HTML</button>
 
+    <!-- Ejemplo 3: mostrar el texto escrito por el usuario -->
+<input type="text" id="entrada" placeholder="Escribe algo">
+<button type="button" onclick="mostrarEntrada()">Mostrar texto</button>
+<p id="resultado"></p>
+
     <script>
       // Busca el elemento con id "demo" y sustituye su contenido
       function cambiarTexto() {
@@ -42,6 +47,13 @@
       function insertarHTML() {
         document.getElementById("caja").innerHTML = "<strong>Contenido</strong> con <em>formato</em>";
       }
+
+      // Lee lo que ha escrito el usuario y lo muestra en el párrafo.
+// Se usa textContent y no innerHTML para que no se interprete como HTML.
+function mostrarEntrada() {
+  const texto = document.getElementById("entrada").value;
+  document.getElementById("resultado").textContent = texto;
+}
     </script>
   </main>
 
