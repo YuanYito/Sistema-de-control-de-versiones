@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modificar contenido HTML</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Curso de JavaScript aplicado a HTML</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contenido.html">Modificar contenido HTML</a></li>
+      <li><a href="atributos.html">Modificar atributos HTML</a></li>
+      <li><a href="estilos.html">Modificar estilos CSS</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Modificar contenido HTML</h2>
+    <p>La propiedad <code>innerHTML</code> permite cambiar el contenido de cualquier elemento desde JavaScript.</p>
+
+    <!-- Ejemplo 1: cambiar un texto -->
+    <p id="demo">Este texto va a cambiar.</p>
+    <button type="button" onclick="cambiarTexto()">Cambiar texto</button>
+
+    <!-- Ejemplo 2: insertar HTML dentro de un elemento -->
+    <div id="caja">Esta caja está vacía.</div>
+    <button type="button" onclick="insertarHTML()">Insertar HTML</button>
+
+    <script>
+      // Busca el elemento con id "demo" y sustituye su contenido
+      function cambiarTexto() {
+        document.getElementById("demo").innerHTML = "¡Hola desde JavaScript!";
+      }
+
+      // innerHTML también interpreta etiquetas HTML
+      function insertarHTML() {
+        document.getElementById("caja").innerHTML = "<strong>Contenido</strong> con <em>formato</em>";
+      }
+    </script>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Curso de JavaScript aplicado a HTML</p>
+  </footer>
+</body>
+</html>
