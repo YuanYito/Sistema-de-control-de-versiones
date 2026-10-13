@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentación: Git Flow en el curso de JavaScript</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1, h2 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #bdc3c7; padding: 8px; text-align: left; }
+    pre { background: #ecf0f1; padding: 10px; overflow-x: auto; }
+    img { max-width: 100%; border: 1px solid #bdc3c7; }
+  </style>
+</head>
+<body>
+  <h1>Documentación del proceso con Git Flow</h1>
+  <p>Proyecto: página web del curso de JavaScript aplicado a elementos HTML.</p>
+
+  <h2>1. Introducción teórica</h2>
+
+  <h3>¿Qué es Git?</h3>
+  <p>Git es un sistema de control de versiones distribuido. Guarda el historial de cambios de un proyecto, permite volver a estados anteriores y deja que varias personas trabajen a la vez sin pisarse, gracias a las ramas.</p>
+
+  <h3>¿Qué es Git Flow?</h3>
+  <p>Git Flow es una metodología de trabajo con ramas propuesta por Vincent Driessen. Define dos ramas principales, de vida indefinida, y tres tipos de ramas de apoyo, de vida limitada.</p>
+  <table>
+    <tr><th>Rama</th><th>Parte de</th><th>Se fusiona con</th><th>Función</th></tr>
+    <tr><td>main</td><td>-</td><td>-</td><td>Contiene siempre el código listo para producción</td></tr>
+    <tr><td>develop</td><td>main</td><td>-</td><td>Reúne los últimos cambios de la próxima versión</td></tr>
+    <tr><td>feature/*</td><td>develop</td><td>develop</td><td>Desarrolla una funcionalidad nueva</td></tr>
+    <tr><td>release/*</td><td>develop</td><td>main y develop</td><td>Prepara una versión y la etiqueta</td></tr>
+    <tr><td>hotfix/*</td><td>main</td><td>main y develop</td><td>Corrige errores de producción con rapidez</td></tr>
+  </table>
+  <p>En este proyecto la rama de producción se llama <code>main</code>, que equivale a la <code>master</code> de la teoría.</p>
+
+  <h3>¿Por qué la usamos?</h3>
+  <p>El equipo tiene tres personas trabajando en partes distintas de la misma web. Git Flow separa el trabajo en curso (<code>develop</code> y las features) del código estable (<code>main</code>), reduce los errores humanos y deja un historial ordenado de funcionalidades, versiones y correcciones.</p>
+
+  <h2>2. Proceso realizado</h2>
+  <!-- Aquí irá cada paso, con comandos y capturas -->
+</body>
+</html>
